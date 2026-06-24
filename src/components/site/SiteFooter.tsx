@@ -47,16 +47,16 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm text-foreground/70">
             <li className="flex items-start gap-3">
               <MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" />
-              <span>Unit 4, Stone Yard<br/>United Kingdom</span>
+              <span>6-8 Berkeley Court, Borough Road<br/>Newcastle-under-lyme<br/>Staffordshire<br/>ST5 1TT<br/>United Kingdom</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-gold shrink-0" />
-              <a href="tel:+441234567890" className="hover:text-gold transition-colors">+44 1234 567 890</a>
+              <a href="tel:07584425115" className="hover:text-gold transition-colors">07584425115</a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-gold shrink-0" />
-              <a href="mailto:studio@mannockgranite.co.uk" className="hover:text-gold transition-colors">
-                studio@mannockgranite.co.uk
+              <a href="mailto:info@mannock-granite.com" className="hover:text-gold transition-colors">
+                info@mannock-granite.com
               </a>
             </li>
           </ul>

@@ -14,7 +14,8 @@ export function CtaStrip() {
         <div className="relative mt-6 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
           <Reveal delay={0.1}>
             <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-2xl">
-              Commission a surface <em className="text-gold-gradient not-italic">made to last</em> a generation.
+              Commission a surface <em className="text-gold-gradient not-italic">made to last</em> a
+              generation.
             </h2>
           </Reveal>
           <Reveal delay={0.2}>

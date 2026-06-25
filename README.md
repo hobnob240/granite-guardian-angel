@@ -116,14 +116,14 @@ src/
 
 ## Scripts
 
-| Command             | Description                          |
-|---------------------|--------------------------------------|
-| `bun run dev`       | Start development server             |
-| `bun run build`     | Production build                     |
-| `bun run build:dev` | Development build                    |
-| `bun run preview`   | Preview production build locally     |
-| `bun run lint`      | Run ESLint                           |
-| `bun run format`    | Format with Prettier                 |
+| Command             | Description                      |
+| ------------------- | -------------------------------- |
+| `bun run dev`       | Start development server         |
+| `bun run build`     | Production build                 |
+| `bun run build:dev` | Development build                |
+| `bun run preview`   | Preview production build locally |
+| `bun run lint`      | Run ESLint                       |
+| `bun run format`    | Format with Prettier             |
 
 ## License
 

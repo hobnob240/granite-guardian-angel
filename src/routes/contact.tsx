@@ -17,7 +17,10 @@ export const Route = createFileRoute("/contact")({
           "Request a quote for granite, quartz, marble or porcelain worktops. Tell us about your project, upload plans and we'll be in touch within one working day.",
       },
       { property: "og:title", content: "Request a Quote — Mannock Granite" },
-      { property: "og:description", content: "Tell us about your project. We'll reply within one working day." },
+      {
+        property: "og:description",
+        content: "Tell us about your project. We'll reply within one working day.",
+      },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
@@ -76,21 +79,31 @@ function ContactPage() {
                   <CheckCircle2 className="mx-auto h-12 w-12 text-gold" strokeWidth={1.25} />
                   <h2 className="mt-6 font-display text-4xl">Thank you.</h2>
                   <p className="mt-4 text-foreground/70 max-w-md mx-auto">
-                    Your enquiry is with the studio. Anna or David will be in touch within one working day.
+                    Your enquiry is with the studio. Anna or David will be in touch within one
+                    working day.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={onSubmit} className="space-y-8" noValidate>
                   <Group label="Project Type">
-                    <RadioRow name="projectType" options={["Kitchen", "Bathroom", "Commercial", "Bespoke"]} />
+                    <RadioRow
+                      name="projectType"
+                      options={["Kitchen", "Bathroom", "Commercial", "Bespoke"]}
+                    />
                   </Group>
 
                   <Group label="Material Interest">
-                    <RadioRow name="material" options={["Granite", "Quartz", "Marble", "Porcelain", "Undecided"]} />
+                    <RadioRow
+                      name="material"
+                      options={["Granite", "Quartz", "Marble", "Porcelain", "Undecided"]}
+                    />
                   </Group>
 
                   <Group label="Budget Range">
-                    <RadioRow name="budget" options={["Under £5k", "£5–10k", "£10–20k", "£20–30k", "£30k+"]} />
+                    <RadioRow
+                      name="budget"
+                      options={["Under £5k", "£5–10k", "£10–20k", "£20–30k", "£30k+"]}
+                    />
                   </Group>
 
                   <div className="grid sm:grid-cols-2 gap-6">
@@ -115,9 +128,15 @@ function ContactPage() {
                     <Upload className="h-5 w-5 text-gold shrink-0" />
                     <div>
                       <div className="font-medium text-foreground">Upload plans (optional)</div>
-                      <div className="text-xs mt-1">PDF, DWG or images — share via email after submitting, or attach below.</div>
+                      <div className="text-xs mt-1">
+                        PDF, DWG or images — share via email after submitting, or attach below.
+                      </div>
                     </div>
-                    <input type="file" name="plans" className="ml-auto text-xs text-foreground/60 max-w-[180px]" />
+                    <input
+                      type="file"
+                      name="plans"
+                      className="ml-auto text-xs text-foreground/60 max-w-[180px]"
+                    />
                   </div>
 
                   <button
@@ -137,22 +156,34 @@ function ContactPage() {
                 <Eyebrow>Studio</Eyebrow>
                 <h2 className="mt-4 font-display text-3xl">Visit the workshop.</h2>
                 <p className="mt-3 text-foreground/70 text-sm leading-relaxed">
-                  By appointment, Monday to Saturday. Walk the slab yard, see live fabrication and pair materials with samples in our viewing gallery.
+                  By appointment, Monday to Saturday. Walk the slab yard, see live fabrication and
+                  pair materials with samples in our viewing gallery.
                 </p>
               </div>
 
               <ul className="space-y-5 text-sm text-foreground/80">
                 <li className="flex items-start gap-4">
                   <MapPin className="h-5 w-5 mt-0.5 text-gold shrink-0" />
-                  <span>Unit 4, Stone Yard<br/>United Kingdom</span>
+                  <span>
+                    Unit 4, Stone Yard
+                    <br />
+                    United Kingdom
+                  </span>
                 </li>
                 <li className="flex items-center gap-4">
                   <Phone className="h-5 w-5 text-gold shrink-0" />
-                  <a href="tel:+441234567890" className="hover:text-gold transition-colors">+44 1234 567 890</a>
+                  <a href="tel:+441234567890" className="hover:text-gold transition-colors">
+                    +44 1234 567 890
+                  </a>
                 </li>
                 <li className="flex items-center gap-4">
                   <Mail className="h-5 w-5 text-gold shrink-0" />
-                  <a href="mailto:studio@mannockgranite.co.uk" className="hover:text-gold transition-colors">studio@mannockgranite.co.uk</a>
+                  <a
+                    href="mailto:studio@mannockgranite.co.uk"
+                    className="hover:text-gold transition-colors"
+                  >
+                    studio@mannockgranite.co.uk
+                  </a>
                 </li>
               </ul>
 
@@ -168,7 +199,8 @@ function ContactPage() {
               <div>
                 <Eyebrow>Service Area</Eyebrow>
                 <p className="mt-4 text-sm text-foreground/70 leading-relaxed">
-                  London and the Home Counties for residential commissions. UK-wide for commercial and bespoke architectural work, with phased install programmes available.
+                  London and the Home Counties for residential commissions. UK-wide for commercial
+                  and bespoke architectural work, with phased install programmes available.
                 </p>
               </div>
             </div>
@@ -193,7 +225,13 @@ function RadioRow({ name, options }: { name: string; options: string[] }) {
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
         <label key={o} className="cursor-pointer">
-          <input type="radio" name={name} value={o} className="peer sr-only" defaultChecked={options[0] === o} />
+          <input
+            type="radio"
+            name={name}
+            value={o}
+            className="peer sr-only"
+            defaultChecked={options[0] === o}
+          />
           <span className="block px-4 py-2.5 text-xs tracking-[0.2em] uppercase border border-white/15 text-foreground/70 transition-all peer-checked:border-gold peer-checked:text-gold peer-checked:bg-gold/5 hover:border-white/40">
             {o}
           </span>
@@ -218,7 +256,10 @@ function Field({
 }) {
   return (
     <div>
-      <label className="eyebrow mb-3 block">{label}{required && <span className="text-gold ml-1">*</span>}</label>
+      <label className="eyebrow mb-3 block">
+        {label}
+        {required && <span className="text-gold ml-1">*</span>}
+      </label>
       <input
         name={name}
         type={type}

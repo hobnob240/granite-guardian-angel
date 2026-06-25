@@ -13,13 +13,15 @@ export function SiteFooter() {
             </div>
             <div>
               <div className="font-display text-2xl">Mannock Granite</div>
-              <div className="text-[0.65rem] tracking-[0.35em] uppercase text-gold">Stone Atelier</div>
+              <div className="text-[0.65rem] tracking-[0.35em] uppercase text-gold">
+                Stone Atelier
+              </div>
             </div>
           </div>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
             A family-run stone atelier crafting bespoke granite, quartz, marble and porcelain
-            surfaces for the most discerning kitchens, bathrooms and commercial interiors across
-            the United Kingdom.
+            surfaces for the most discerning kitchens, bathrooms and commercial interiors across the
+            United Kingdom.
           </p>
         </div>
 
@@ -47,15 +49,30 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm text-foreground/70">
             <li className="flex items-start gap-3">
               <MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" />
-              <span>6-8 Berkeley Court, Borough Road<br/>Newcastle-under-lyme<br/>Staffordshire<br/>ST5 1TT<br/>United Kingdom</span>
+              <span>
+                6-8 Berkeley Court, Borough Road
+                <br />
+                Newcastle-under-lyme
+                <br />
+                Staffordshire
+                <br />
+                ST5 1TT
+                <br />
+                United Kingdom
+              </span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-gold shrink-0" />
-              <a href="tel:07584425115" className="hover:text-gold transition-colors">07584425115</a>
+              <a href="tel:07584425115" className="hover:text-gold transition-colors">
+                07584425115
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail className="h-4 w-4 text-gold shrink-0" />
-              <a href="mailto:info@mannock-granite.com" className="hover:text-gold transition-colors">
+              <a
+                href="mailto:info@mannock-granite.com"
+                className="hover:text-gold transition-colors"
+              >
                 info@mannock-granite.com
               </a>
             </li>
@@ -66,7 +83,9 @@ export function SiteFooter() {
       <div className="border-t border-white/5">
         <div className="mx-auto max-w-7xl px-6 lg:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Mannock Granite. All rights reserved.</p>
-          <p className="tracking-[0.25em] uppercase text-[0.65rem]">Crafted in Stone · Since 1998</p>
+          <p className="tracking-[0.25em] uppercase text-[0.65rem]">
+            Crafted in Stone · Since 1998
+          </p>
         </div>
       </div>
     </footer>

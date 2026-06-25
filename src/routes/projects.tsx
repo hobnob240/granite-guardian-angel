@@ -22,7 +22,10 @@ export const Route = createFileRoute("/projects")({
           "A portfolio of bespoke stone projects — luxury kitchens, master bathrooms, commercial spaces and bespoke architectural features.",
       },
       { property: "og:title", content: "Project Portfolio — Mannock Granite" },
-      { property: "og:description", content: "Filterable gallery of premium stone worktop and feature projects." },
+      {
+        property: "og:description",
+        content: "Filterable gallery of premium stone worktop and feature projects.",
+      },
       { property: "og:url", content: "/projects" },
       { property: "og:image", content: projectKitchen },
     ],
@@ -42,12 +45,69 @@ type Project = {
 };
 
 const projects: Project[] = [
-  { id: "1", title: "Belgravia Townhouse", category: "Kitchens", material: "Calacatta Quartz", location: "London SW1", description: "A 4.2m island with mitred waterfall ends and a continuous splashback in matched quartz.", img: projectKitchen, span: "md:row-span-2 md:col-span-2" },
-  { id: "2", title: "Highgate Master Suite", category: "Bathrooms", material: "Bookmatched Calacatta Marble", location: "London N6", description: "Bookmatched marble wall, freestanding basin and continuous vanity in honed finish.", img: projectBath },
-  { id: "3", title: "Mayfair Members' Bar", category: "Commercial", material: "Nero Marquina", location: "London W1", description: "16m solid stone bar with curved end profile, fabricated and installed in three phases.", img: projectCommercial, span: "md:col-span-2" },
-  { id: "4", title: "Cotswolds Retreat", category: "Bespoke", material: "Honed Limestone", location: "Cotswolds", description: "Sculptural fireplace surround and full hearth, hand-finished from a single block.", img: projectBespoke },
-  { id: "5", title: "Hampstead Family Kitchen", category: "Kitchens", material: "White Statuario Quartz", location: "London NW3", description: "Family kitchen with seating peninsula, integrated drainage and concealed sockets.", img: projectKitchen2, span: "md:row-span-2" },
-  { id: "6", title: "Notting Hill Ensuite", category: "Bathrooms", material: "Travertine Porcelain", location: "London W11", description: "Floor-to-ceiling porcelain in warm beige with brass accents and stone bath surround.", img: projectBath2 },
+  {
+    id: "1",
+    title: "Belgravia Townhouse",
+    category: "Kitchens",
+    material: "Calacatta Quartz",
+    location: "London SW1",
+    description:
+      "A 4.2m island with mitred waterfall ends and a continuous splashback in matched quartz.",
+    img: projectKitchen,
+    span: "md:row-span-2 md:col-span-2",
+  },
+  {
+    id: "2",
+    title: "Highgate Master Suite",
+    category: "Bathrooms",
+    material: "Bookmatched Calacatta Marble",
+    location: "London N6",
+    description:
+      "Bookmatched marble wall, freestanding basin and continuous vanity in honed finish.",
+    img: projectBath,
+  },
+  {
+    id: "3",
+    title: "Mayfair Members' Bar",
+    category: "Commercial",
+    material: "Nero Marquina",
+    location: "London W1",
+    description:
+      "16m solid stone bar with curved end profile, fabricated and installed in three phases.",
+    img: projectCommercial,
+    span: "md:col-span-2",
+  },
+  {
+    id: "4",
+    title: "Cotswolds Retreat",
+    category: "Bespoke",
+    material: "Honed Limestone",
+    location: "Cotswolds",
+    description:
+      "Sculptural fireplace surround and full hearth, hand-finished from a single block.",
+    img: projectBespoke,
+  },
+  {
+    id: "5",
+    title: "Hampstead Family Kitchen",
+    category: "Kitchens",
+    material: "White Statuario Quartz",
+    location: "London NW3",
+    description:
+      "Family kitchen with seating peninsula, integrated drainage and concealed sockets.",
+    img: projectKitchen2,
+    span: "md:row-span-2",
+  },
+  {
+    id: "6",
+    title: "Notting Hill Ensuite",
+    category: "Bathrooms",
+    material: "Travertine Porcelain",
+    location: "London W11",
+    description:
+      "Floor-to-ceiling porcelain in warm beige with brass accents and stone bath surround.",
+    img: projectBath2,
+  },
 ];
 
 const categories = ["All", "Kitchens", "Bathrooms", "Commercial", "Bespoke"] as const;
@@ -58,7 +118,7 @@ function ProjectsPage() {
 
   const filtered = useMemo(
     () => (active === "All" ? projects : projects.filter((p) => p.category === active)),
-    [active]
+    [active],
   );
 
   return (
@@ -114,7 +174,9 @@ function ProjectsPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/10 to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 p-6">
-                    <div className="text-[0.6rem] tracking-[0.35em] uppercase text-gold">{p.category} · {p.material}</div>
+                    <div className="text-[0.6rem] tracking-[0.35em] uppercase text-gold">
+                      {p.category} · {p.material}
+                    </div>
                     <div className="font-display text-2xl mt-2">{p.title}</div>
                     <div className="text-xs text-foreground/60 mt-1">{p.location}</div>
                   </div>
@@ -146,7 +208,9 @@ function ProjectsPage() {
               <div className="p-10">
                 <Eyebrow>{open.category}</Eyebrow>
                 <h3 className="mt-4 font-display text-4xl">{open.title}</h3>
-                <div className="mt-2 text-sm text-foreground/60">{open.location} · {open.material}</div>
+                <div className="mt-2 text-sm text-foreground/60">
+                  {open.location} · {open.material}
+                </div>
                 <p className="mt-6 text-foreground/80 leading-relaxed">{open.description}</p>
                 <button
                   onClick={() => setOpen(null)}

@@ -18,7 +18,10 @@ export const Route = createFileRoute("/materials")({
           "Explore Mannock Granite's curated stone catalogue — granite, quartz, marble and porcelain worktops with full benefits, maintenance and colour guidance.",
       },
       { property: "og:title", content: "Stone Materials — Mannock Granite" },
-      { property: "og:description", content: "A curated catalogue of premium stone worktop materials." },
+      {
+        property: "og:description",
+        content: "A curated catalogue of premium stone worktop materials.",
+      },
       { property: "og:url", content: "/materials" },
       { property: "og:image", content: marbleImg },
     ],
@@ -42,9 +45,15 @@ const materials: Material[] = [
     name: "Granite",
     tagline: "Igneous strength. Mineral depth.",
     img: graniteImg,
-    benefits: ["Exceptionally hard, heat- and scratch-resistant", "Each slab one-of-one", "Centuries of architectural pedigree"],
-    durability: "Mohs 6–7. Resistant to heat, knives and most kitchen wear. Sealed correctly, performs for decades.",
-    maintenance: "Re-seal annually. Wipe with neutral pH cleaner. Avoid acidic citrus left on the surface.",
+    benefits: [
+      "Exceptionally hard, heat- and scratch-resistant",
+      "Each slab one-of-one",
+      "Centuries of architectural pedigree",
+    ],
+    durability:
+      "Mohs 6–7. Resistant to heat, knives and most kitchen wear. Sealed correctly, performs for decades.",
+    maintenance:
+      "Re-seal annually. Wipe with neutral pH cleaner. Avoid acidic citrus left on the surface.",
     colours: ["Nero Assoluto", "Star Galaxy", "Verde Ubatuba", "Blue Pearl", "Ivory Brown"],
     applications: ["Kitchen worktops", "Outdoor BBQ counters", "Heavy-use commercial bars"],
   },
@@ -52,28 +61,53 @@ const materials: Material[] = [
     name: "Quartz",
     tagline: "Engineered consistency. Endless palette.",
     img: quartzImg,
-    benefits: ["Non-porous — never needs sealing", "Consistent pattern across slabs", "Backed by 10–25 year warranties"],
-    durability: "93% natural quartz, 7% polymer resin. Stain, scratch and bacteria-resistant. Less heat-tolerant than stone.",
+    benefits: [
+      "Non-porous — never needs sealing",
+      "Consistent pattern across slabs",
+      "Backed by 10–25 year warranties",
+    ],
+    durability:
+      "93% natural quartz, 7% polymer resin. Stain, scratch and bacteria-resistant. Less heat-tolerant than stone.",
     maintenance: "Soap and water. No sealing required. Use a trivet for hot pans.",
-    colours: ["Calacatta Classique", "Statuario", "Pure White", "Concrete Grey", "Charcoal Soapstone"],
+    colours: [
+      "Calacatta Classique",
+      "Statuario",
+      "Pure White",
+      "Concrete Grey",
+      "Charcoal Soapstone",
+    ],
     applications: ["Family kitchens", "Bathroom vanities", "Reception counters"],
   },
   {
     name: "Marble",
     tagline: "Veined drama. Sculptural presence.",
     img: marbleImg,
-    benefits: ["Unmatched veining and depth", "Patinas beautifully with age", "Cool to the touch — perfect for pastry"],
-    durability: "Softer than granite (Mohs 3–4). Develops a lived-in patina over time — a feature for many, a consideration for some.",
+    benefits: [
+      "Unmatched veining and depth",
+      "Patinas beautifully with age",
+      "Cool to the touch — perfect for pastry",
+    ],
+    durability:
+      "Softer than granite (Mohs 3–4). Develops a lived-in patina over time — a feature for many, a consideration for some.",
     maintenance: "Seal regularly. Blot spills immediately, especially acids. Embrace the etch.",
     colours: ["Calacatta Oro", "Statuario Venato", "Carrara", "Nero Marquina", "Arabescato"],
-    applications: ["Statement islands", "Bathroom walls and floors", "Bespoke furniture and shelving"],
+    applications: [
+      "Statement islands",
+      "Bathroom walls and floors",
+      "Bespoke furniture and shelving",
+    ],
   },
   {
     name: "Porcelain",
     tagline: "Slim profile. Vast formats.",
     img: porcelainImg,
-    benefits: ["UV-stable — ideal indoor and out", "Available in 12mm slim slabs", "Visually mimics stone, concrete or metal"],
-    durability: "Sintered at 1200°C. Highly resistant to heat, UV, staining and scratching. Excellent for outdoor kitchens.",
+    benefits: [
+      "UV-stable — ideal indoor and out",
+      "Available in 12mm slim slabs",
+      "Visually mimics stone, concrete or metal",
+    ],
+    durability:
+      "Sintered at 1200°C. Highly resistant to heat, UV, staining and scratching. Excellent for outdoor kitchens.",
     maintenance: "Effectively maintenance-free. Standard household cleaners. No sealing.",
     colours: ["Calacatta Statuario", "Pietra Grey", "Travertino", "Cement Beige", "Onyx Nero"],
     applications: ["Outdoor kitchens", "Cladding and feature walls", "Large-format flooring"],
@@ -102,9 +136,19 @@ function MaterialsPage() {
   );
 }
 
-function MaterialBlock({ material: m, reverse, index }: { material: Material; reverse: boolean; index: number }) {
+function MaterialBlock({
+  material: m,
+  reverse,
+  index,
+}: {
+  material: Material;
+  reverse: boolean;
+  index: number;
+}) {
   return (
-    <article className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-start ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
+    <article
+      className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-start ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}
+    >
       <Reveal>
         <div className="relative overflow-hidden group">
           <img
@@ -145,7 +189,10 @@ function MaterialBlock({ material: m, reverse, index }: { material: Material; re
           <div className="eyebrow mb-4">Popular Colours</div>
           <div className="flex flex-wrap gap-2">
             {m.colours.map((c) => (
-              <span key={c} className="text-xs px-3 py-1.5 border border-white/15 text-foreground/80">
+              <span
+                key={c}
+                className="text-xs px-3 py-1.5 border border-white/15 text-foreground/80"
+              >
                 {c}
               </span>
             ))}
@@ -155,7 +202,9 @@ function MaterialBlock({ material: m, reverse, index }: { material: Material; re
         <div className="mt-10">
           <div className="eyebrow mb-4">Best For</div>
           <ul className="space-y-2 text-sm text-foreground/75">
-            {m.applications.map((a) => <li key={a}>— {a}</li>)}
+            {m.applications.map((a) => (
+              <li key={a}>— {a}</li>
+            ))}
           </ul>
         </div>
       </Reveal>

@@ -111,7 +111,7 @@ function ContactPage() {
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={onSubmit} className="space-y-8" noValidate>
+                <form onSubmit={onSubmit} method="POST" className="space-y-8" noValidate>
                   <Group label="Project Type">
                     <RadioRow
                       name="projectType"

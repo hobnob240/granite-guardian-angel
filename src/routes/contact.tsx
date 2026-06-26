@@ -134,10 +134,10 @@ function ContactPage() {
                   </Group>
 
                   <div className="grid sm:grid-cols-2 gap-6">
-                    <Field name="name" label="Your Name" error={errors.name} required />
-                    <Field name="email" label="Email" type="email" error={errors.email} required />
-                    <Field name="phone" label="Phone (optional)" type="tel" />
-                    <Field name="postcode" label="Postcode" error={errors.postcode} required />
+                    <Field name="name" label="Your Name" error={errors.name} required disabled={isSubmitting} />
+                    <Field name="email" label="Email" type="email" error={errors.email} required disabled={isSubmitting} />
+                    <Field name="phone" label="Phone (optional)" type="tel" disabled={isSubmitting} />
+                    <Field name="postcode" label="Postcode" error={errors.postcode} required disabled={isSubmitting} />
                   </div>
 
                   <div>

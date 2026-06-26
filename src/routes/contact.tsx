@@ -260,15 +260,16 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function RadioRow({ name, options }: { name: string; options: string[] }) {
+function RadioRow({ name, options, disabled }: { name: string; options: string[]; disabled?: boolean }) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
-        <label key={o} className="cursor-pointer">
+        <label key={o} className={`cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}>
           <input
             type="radio"
             name={name}
             value={o}
+            disabled={disabled}
             className="peer sr-only"
             defaultChecked={options[0] === o}
           />

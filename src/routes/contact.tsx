@@ -151,6 +151,16 @@ function ContactPage() {
                     />
                   </div>
 
+                  {formspreeError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-sm text-destructive bg-destructive/10 border border-destructive/20 px-4 py-3"
+                    >
+                      {formspreeError}
+                    </motion.div>
+                  )}
+
                   <div className="border border-dashed border-white/15 p-6 flex items-center gap-4 text-sm text-foreground/65">
                     <Upload className="h-5 w-5 text-gold shrink-0" />
                     <div>
@@ -162,15 +172,17 @@ function ContactPage() {
                     <input
                       type="file"
                       name="plans"
-                      className="ml-auto text-xs text-foreground/60 max-w-[180px]"
+                      disabled={isSubmitting}
+                      className="ml-auto text-xs text-foreground/60 max-w-[180px] disabled:opacity-40"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gold text-primary-foreground px-8 py-4 text-xs tracking-[0.3em] uppercase hover:bg-gold-soft transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full bg-gold text-primary-foreground px-8 py-4 text-xs tracking-[0.3em] uppercase hover:bg-gold-soft transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Submit Enquiry
+                    {isSubmitting ? "Sending…" : "Submit Enquiry"}
                   </button>
                 </form>
               )}

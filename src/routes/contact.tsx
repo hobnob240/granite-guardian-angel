@@ -146,8 +146,9 @@ function ContactPage() {
                       name="notes"
                       rows={5}
                       maxLength={2000}
+                      disabled={isSubmitting}
                       placeholder="Tell us about the space, your timeline, your designer or any references you've gathered."
-                      className="w-full bg-transparent border border-white/15 px-4 py-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none"
+                      className="w-full bg-transparent border border-white/15 px-4 py-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none disabled:opacity-40"
                     />
                   </div>
 

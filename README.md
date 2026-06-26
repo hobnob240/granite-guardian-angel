@@ -69,13 +69,26 @@ bun run preview
 
 ## Deployment
 
-### Cloudflare Workers (default)
+### Cloudflare Workers (recommended — automated via GitHub Actions)
 
-The project builds to a Cloudflare Worker by default.
+This repo ships with `wrangler.toml` and `.github/workflows/deploy.yml`. Every push to `main` builds and deploys to Cloudflare Workers automatically — the code lives on GitHub, Cloudflare runs the hosting.
+
+**One-time setup:**
+
+1. Create a Cloudflare account at [cloudflare.com](https://cloudflare.com) and grab your **Account ID** (Workers & Pages → right sidebar).
+2. Create an API token at [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) using the **"Edit Cloudflare Workers"** template.
+3. In your GitHub repo go to **Settings → Secrets and variables → Actions → New repository secret** and add:
+   - `CLOUDFLARE_API_TOKEN` — the token from step 2
+   - `CLOUDFLARE_ACCOUNT_ID` — the account ID from step 1
+4. Push to `main`. The workflow builds and deploys; your site goes live at `https://mannock-granite.<your-subdomain>.workers.dev`.
+
+To rename the Worker, edit the `name` field in `wrangler.toml`. To attach a custom domain, add a route in the Cloudflare dashboard under your Worker → Settings → Triggers → Custom Domains.
+
+**Manual deploy (optional):**
 
 ```bash
 bun run build
-npx wrangler deploy .output/server/index.mjs
+npx wrangler deploy
 ```
 
 ### Vercel

@@ -64,11 +64,15 @@ function ContactPage() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
+      const formData = new FormData(form);
+
+const response = await fetch(FORMSPREE_ENDPOINT, {
+  method: "POST",
+  headers: {
+    Accept: "application/json",
+  },
+  body: formData,
+});
       if (response.ok) {
         setSubmitted(true);
         form.reset();

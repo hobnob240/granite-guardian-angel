@@ -291,12 +291,14 @@ function Field({
   type = "text",
   error,
   required,
+  disabled,
 }: {
   name: string;
   label: string;
   type?: string;
   error?: string;
   required?: boolean;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -308,8 +310,9 @@ function Field({
         name={name}
         type={type}
         required={required}
+        disabled={disabled}
         maxLength={255}
-        className="w-full bg-transparent border-b border-white/15 px-0 py-2.5 text-sm focus:border-gold focus:outline-none transition-colors"
+        className="w-full bg-transparent border-b border-white/15 px-0 py-2.5 text-sm focus:border-gold focus:outline-none transition-colors disabled:opacity-40"
       />
       {error && <div className="mt-2 text-xs text-destructive">{error}</div>}
     </div>

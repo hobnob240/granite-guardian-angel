@@ -116,6 +116,7 @@ function ContactPage() {
                     <RadioRow
                       name="projectType"
                       options={["Kitchen", "Bathroom", "Commercial", "Bespoke"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 
@@ -123,6 +124,7 @@ function ContactPage() {
                     <RadioRow
                       name="material"
                       options={["Granite", "Quartz", "Marble", "Porcelain", "Undecided"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 
@@ -130,6 +132,7 @@ function ContactPage() {
                     <RadioRow
                       name="budget"
                       options={["Under £5k", "£5–10k", "£10–20k", "£20–30k", "£30k+"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 

@@ -1,4 +1,4 @@
-name = "mannock-granite"
+name = "granite"
 main = ".output/server/index.mjs"
 compatibility_date = "2025-06-01"
 compatibility_flags = ["nodejs_compat"]

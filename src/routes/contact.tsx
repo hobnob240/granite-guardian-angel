@@ -38,13 +38,19 @@ const schema = z.object({
   notes: z.string().trim().max(2000).optional(),
 });
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xojodqbj";
+
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formspreeError, setFormspreeError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    setFormspreeError(null);
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
     const result = schema.safeParse(data);
     if (!result.success) {
       const next: Record<string, string> = {};
@@ -55,7 +61,28 @@ function ContactPage() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (response.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        const body = await response.json().catch(() => ({}));
+        setFormspreeError(
+          body.error || "Something went wrong sending your enquiry. Please try again."
+        );
+      }
+    } catch {
+      setFormspreeError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

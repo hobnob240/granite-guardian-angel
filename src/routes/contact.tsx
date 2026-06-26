@@ -38,13 +38,19 @@ const schema = z.object({
   notes: z.string().trim().max(2000).optional(),
 });
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xojodqbj";
+
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formspreeError, setFormspreeError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    setFormspreeError(null);
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
     const result = schema.safeParse(data);
     if (!result.success) {
       const next: Record<string, string> = {};
@@ -55,7 +61,28 @@ function ContactPage() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      if (response.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        const body = await response.json().catch(() => ({}));
+        setFormspreeError(
+          body.error || "Something went wrong sending your enquiry. Please try again.",
+        );
+      }
+    } catch {
+      setFormspreeError("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -89,6 +116,7 @@ function ContactPage() {
                     <RadioRow
                       name="projectType"
                       options={["Kitchen", "Bathroom", "Commercial", "Bespoke"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 
@@ -96,6 +124,7 @@ function ContactPage() {
                     <RadioRow
                       name="material"
                       options={["Granite", "Quartz", "Marble", "Porcelain", "Undecided"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 
@@ -103,14 +132,39 @@ function ContactPage() {
                     <RadioRow
                       name="budget"
                       options={["Under £5k", "£5–10k", "£10–20k", "£20–30k", "£30k+"]}
+                      disabled={isSubmitting}
                     />
                   </Group>
 
                   <div className="grid sm:grid-cols-2 gap-6">
-                    <Field name="name" label="Your Name" error={errors.name} required />
-                    <Field name="email" label="Email" type="email" error={errors.email} required />
-                    <Field name="phone" label="Phone (optional)" type="tel" />
-                    <Field name="postcode" label="Postcode" error={errors.postcode} required />
+                    <Field
+                      name="name"
+                      label="Your Name"
+                      error={errors.name}
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="email"
+                      label="Email"
+                      type="email"
+                      error={errors.email}
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="phone"
+                      label="Phone (optional)"
+                      type="tel"
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="postcode"
+                      label="Postcode"
+                      error={errors.postcode}
+                      required
+                      disabled={isSubmitting}
+                    />
                   </div>
 
                   <div>
@@ -119,10 +173,21 @@ function ContactPage() {
                       name="notes"
                       rows={5}
                       maxLength={2000}
+                      disabled={isSubmitting}
                       placeholder="Tell us about the space, your timeline, your designer or any references you've gathered."
-                      className="w-full bg-transparent border border-white/15 px-4 py-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none"
+                      className="w-full bg-transparent border border-white/15 px-4 py-3 text-sm focus:border-gold focus:outline-none transition-colors resize-none disabled:opacity-40"
                     />
                   </div>
+
+                  {formspreeError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-sm text-destructive bg-destructive/10 border border-destructive/20 px-4 py-3"
+                    >
+                      {formspreeError}
+                    </motion.div>
+                  )}
 
                   <div className="border border-dashed border-white/15 p-6 flex items-center gap-4 text-sm text-foreground/65">
                     <Upload className="h-5 w-5 text-gold shrink-0" />
@@ -135,15 +200,17 @@ function ContactPage() {
                     <input
                       type="file"
                       name="plans"
-                      className="ml-auto text-xs text-foreground/60 max-w-[180px]"
+                      disabled={isSubmitting}
+                      className="ml-auto text-xs text-foreground/60 max-w-[180px] disabled:opacity-40"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gold text-primary-foreground px-8 py-4 text-xs tracking-[0.3em] uppercase hover:bg-gold-soft transition-colors"
+                    disabled={isSubmitting}
+                    className="w-full bg-gold text-primary-foreground px-8 py-4 text-xs tracking-[0.3em] uppercase hover:bg-gold-soft transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Submit Enquiry
+                    {isSubmitting ? "Sending…" : "Submit Enquiry"}
                   </button>
                 </form>
               )}
@@ -220,15 +287,27 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function RadioRow({ name, options }: { name: string; options: string[] }) {
+function RadioRow({
+  name,
+  options,
+  disabled,
+}: {
+  name: string;
+  options: string[];
+  disabled?: boolean;
+}) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
-        <label key={o} className="cursor-pointer">
+        <label
+          key={o}
+          className={`cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}
+        >
           <input
             type="radio"
             name={name}
             value={o}
+            disabled={disabled}
             className="peer sr-only"
             defaultChecked={options[0] === o}
           />
@@ -247,12 +326,14 @@ function Field({
   type = "text",
   error,
   required,
+  disabled,
 }: {
   name: string;
   label: string;
   type?: string;
   error?: string;
   required?: boolean;
+  disabled?: boolean;
 }) {
   return (
     <div>
@@ -264,8 +345,9 @@ function Field({
         name={name}
         type={type}
         required={required}
+        disabled={disabled}
         maxLength={255}
-        className="w-full bg-transparent border-b border-white/15 px-0 py-2.5 text-sm focus:border-gold focus:outline-none transition-colors"
+        className="w-full bg-transparent border-b border-white/15 px-0 py-2.5 text-sm focus:border-gold focus:outline-none transition-colors disabled:opacity-40"
       />
       {error && <div className="mt-2 text-xs text-destructive">{error}</div>}
     </div>

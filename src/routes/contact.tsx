@@ -75,7 +75,7 @@ function ContactPage() {
       } else {
         const body = await response.json().catch(() => ({}));
         setFormspreeError(
-          body.error || "Something went wrong sending your enquiry. Please try again."
+          body.error || "Something went wrong sending your enquiry. Please try again.",
         );
       }
     } catch {
@@ -137,10 +137,34 @@ function ContactPage() {
                   </Group>
 
                   <div className="grid sm:grid-cols-2 gap-6">
-                    <Field name="name" label="Your Name" error={errors.name} required disabled={isSubmitting} />
-                    <Field name="email" label="Email" type="email" error={errors.email} required disabled={isSubmitting} />
-                    <Field name="phone" label="Phone (optional)" type="tel" disabled={isSubmitting} />
-                    <Field name="postcode" label="Postcode" error={errors.postcode} required disabled={isSubmitting} />
+                    <Field
+                      name="name"
+                      label="Your Name"
+                      error={errors.name}
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="email"
+                      label="Email"
+                      type="email"
+                      error={errors.email}
+                      required
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="phone"
+                      label="Phone (optional)"
+                      type="tel"
+                      disabled={isSubmitting}
+                    />
+                    <Field
+                      name="postcode"
+                      label="Postcode"
+                      error={errors.postcode}
+                      required
+                      disabled={isSubmitting}
+                    />
                   </div>
 
                   <div>
@@ -263,11 +287,22 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
   );
 }
 
-function RadioRow({ name, options, disabled }: { name: string; options: string[]; disabled?: boolean }) {
+function RadioRow({
+  name,
+  options,
+  disabled,
+}: {
+  name: string;
+  options: string[];
+  disabled?: boolean;
+}) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((o) => (
-        <label key={o} className={`cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}>
+        <label
+          key={o}
+          className={`cursor-pointer ${disabled ? "opacity-40 pointer-events-none" : ""}`}
+        >
           <input
             type="radio"
             name={name}
